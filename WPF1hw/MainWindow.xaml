@@ -1,0 +1,33 @@
+﻿<Window x:Class="WPF1hw.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WPF1hw"
+        mc:Ignorable="d"
+        Title="Slide Show" Height="450" Width="800">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width =" 1*"/>
+            <ColumnDefinition Width ="500"/>
+            <ColumnDefinition Width =" 1*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="50"/>
+        </Grid.RowDefinitions>
+        <Image Name="ImageCollection" Grid.Column="1" Grid.Row="1" Stretch="Uniform" Source="Images/1.jpg"/>
+        <Button Name ="buttonNext" Click ="Next" Grid.Column="1" Width="150" HorizontalAlignment="Left" Grid.Row="2">Next
+        </Button>
+        <Button Name ="buttonPrev" Click ="Prev" Grid.Column="1" Width="150" HorizontalAlignment="Center" Grid.Row="2">Back
+        </Button>
+        <Button Name ="buttonFirst" Click ="First" Grid.Column="1" Width="150" HorizontalAlignment="Left" Grid.Row="3">First
+        </Button>
+        <Button Name ="buttonLast"  Click ="Last" Grid.Column="1" Width="150" HorizontalAlignment="Center" Grid.Row="3">Last
+        </Button>
+        <Button Name ="buttonPlay" Click ="Play" Grid.Column="1" Width="150" HorizontalAlignment="Right" Grid.Row="2">Play
+        </Button>
+    </Grid>
+</Window>

@@ -1,0 +1,30 @@
+﻿<Window x:Class="WPF3hw.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WPF3hw"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="187" Width="353">
+    <Grid>
+        <PasswordBox Name ="passwordBox" HorizontalAlignment="Left" Margin="10,36,0,0" VerticalAlignment="Top" Width="250" Height="20" PasswordChanged="passwordBox_PasswordChanged"/>
+        <Button Name="buttonPaste" Content="Paste..." HorizontalAlignment="Left" Margin="10,63,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.53,-0.299" Click="buttonPaste_Click"/>
+        <Button Name="buttonClear" Content="Clear" HorizontalAlignment="Left" Margin="55,63,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.53,-0.299" Click="buttonClear_Click"/>
+        <Label Content="Password" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.474,0.002"/>
+        <Button Name ="buttonShow"  Content="Show" HorizontalAlignment="Left" Margin="91,63,0,0" VerticalAlignment="Top" Click="buttonShow_Click"/>
+        <TextBox Name="textBox" HorizontalAlignment="Left" Margin="10,117,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="250" Height="20"/>
+        <Button Name="buttonCopy" Content="Copy..." HorizontalAlignment="Left" Margin="10,142,0,0" VerticalAlignment="Top" Click="buttonCopy_Click"/>
+        <Label Content="Text" HorizontalAlignment="Left" Margin="10,88,0,0" VerticalAlignment="Top"/>
+        <Label Name="changesLabel" Content="Changes: 0" HorizontalAlignment="Left" Margin="129,61,0,0" VerticalAlignment="Top"/>
+        <Label Content="Mask:" HorizontalAlignment="Left" Margin="265,10,0,0" VerticalAlignment="Top"/>
+        <Label Content="Max" HorizontalAlignment="Left" Margin="265,86,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.566,0.888"/>
+        <TextBox Name="maxTextBox"  HorizontalAlignment="Left" Margin="270,117,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="71" Height="20" RenderTransformOrigin="0.55,4.431"/>
+        <CheckBox Name="checkBoxUnlimited" Content="Unlimited" HorizontalAlignment="Left" Margin="270,142,0,0" VerticalAlignment="Top" Checked="checkBoxUnlimited_Checked" Click="checkBoxUnlimited_Click"/>
+        <ComboBox Name="comboBoxMask" HorizontalAlignment="Left" Margin="265,34,0,0" VerticalAlignment="Top" Width="76" SelectionChanged="comboBoxMask_SelectionChanged">
+            <ComboBoxItem Content="@"/>
+            <ComboBoxItem Content="*"/>
+            <ComboBoxItem Content="#"/>
+            
+        </ComboBox>
+    </Grid>
+</Window>

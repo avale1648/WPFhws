@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace WPF3._1cw.Properties
+namespace WPF4hw.Properties
 {
 
 

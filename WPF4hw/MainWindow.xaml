@@ -1,43 +1,22 @@
-﻿<Window x:Class="WPF3._1cw.MainWindow"
+﻿<Window x:Class="WPF4hw.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:col="clr-namespace:System.Collections;assembly=mscorlib"
-        xmlns:local="clr-namespace:WPF3._1cw"
+        xmlns:local="clr-namespace:WPF4hw"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
     <Grid>
-        <!--<ListView Name="products" ItemsSource="{DynamicResource ResourceKey=product}">
-            <ListView.View>
-                <GridView>
-                    <GridViewColumn DisplayMemberBinding="{Binding Path=Name}">Product's Name
-                    </GridViewColumn>
-                    <GridViewColumn DisplayMemberBinding="{Binding Path=MadeBy}">Made By
-                    </GridViewColumn>
-                    <GridViewColumn DisplayMemberBinding="{Binding Path=Name}">Price
-                    </GridViewColumn>
-                </GridView>
-            </ListView.View>
-            <ListView.Resources>
-                <col:ArrayList x:Key="product">
-                    <Local:Product Name ="Milk" MadeBy="Domik v derevne" Price="100f"/>
-                    <Local:Product Name ="Milk" MadeBy="Domik v derevne" Price="100f"/>
-                    <Local:Product Name ="Milk" MadeBy="Domik v derevne" Price="100f"/>
-                </col:ArrayList>
-            </ListView.Resources>
-        </ListView>-->
         <Grid.RowDefinitions>
-            <RowDefinition Height="0.1*"/>
-            <RowDefinition Height="0.9*"/>
+            <RowDefinition Height="20"/>
+            <RowDefinition/>
         </Grid.RowDefinitions>
-        <ComboBox Name="ViewBox" Width="200" HorizontalAlignment="Left">
-            <ComboBoxItem Content="Table"/>
-            <ComboBoxItem Content="Large Icons"/>
-            <ComboBoxItem Content="Small Icons"/>
-            <ComboBoxItem Content="List"/>
+        <ComboBox Name="ViewType" Width="200" HorizontalAlignment="Left" SelectionChanged="ViewType_SelectionChanged">
+            <ComboBoxItem>Table</ComboBoxItem>
+            <ComboBoxItem>Large Icons</ComboBoxItem>
+            <ComboBoxItem>Small Icons</ComboBoxItem>
+            <ComboBoxItem>List</ComboBoxItem>
         </ComboBox>
-        <ListView Name="productsListBox" Grid.Row="1" VerticalAlignment="Center" SelectionChanged="productsListBox_SelectionChanged">
-        </ListView>
+        <ListView Name="Girland" Grid.Row="1" VerticalAlignment="Center" />
     </Grid>
 </Window>

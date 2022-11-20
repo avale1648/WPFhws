@@ -13,131 +13,215 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace WPF3._1cw
+namespace WPF4hw
 {
     /// <summary>
     /// Логика взаимодействия для MainWindow.xaml
     /// </summary>
     public partial class MainWindow : Window
     {
-        private GridView gridView = new GridView();
-        private DataTemplate large;
-        private DataTemplate small;
-        private ItemsPanelTemplate table;
-        private ItemsPanelTemplate smallIcons;
-        private ItemsPanelTemplate largeIcons;
+        GridView GV = new GridView();
+        DataTemplate DT_Big;
+        DataTemplate DT_Small;
+        DataTemplate DT_List;
+        ItemsPanelTemplate IPT_Tabel;
+        ItemsPanelTemplate IPT_Big;
+        ItemsPanelTemplate IPT_Small;
+        ItemsPanelTemplate IPT_List;
         public MainWindow()
         {
-            //Product(string name, string madeBy, float price, string image, BitmapImage imageSource)
             InitializeComponent();
-            productsListBox.Items.Add(new Product("CommParty China  +1000 sc", "China", 1000f, @"Images\1.jpg"));
-            productsListBox.Items.Add(new Product("CommParty China  +1000 sc", "China", 1000f, @"Images\2.jpg"));
-            productsListBox.Items.Add(new Product("CommParty China  +1000 sc", "China", 1000f, @"Images\3.jpg"));
-            productsListBox.Items.Add(new Product("CommParty China  +1000 sc", "China", 1000f, @"Images\4.jpg"));
-            productsListBox.Items.Add(new Product("CommParty China  +1000 sc", "China", 1000f, @"Images\5.jpg"));
-            productsListBox.Items.Add(new Product("CommParty China  +1000 sc", "China", 1000f, @"Images\6.jpg"));
-            productsListBox.Items.Add(new Product("CommParty China  +1000 sc", "China", 1000f, @"Images\7.jpg"));
+            Girland.Items.Add(new AutoList("Ford", "Focus", @"images\1.jpg"));
+            Girland.Items.Add(new AutoList("Ford", "Unfocus", @"images\2.jpg"));
+            Girland.Items.Add(new AutoList("Ford", "Refocus", @"images\3.jpg"));
+            Girland.Items.Add(new AutoList("Ford", "Prefocus", @"images\4.jpg"));
+            Girland.Items.Add(new AutoList("Ford", "Nonfocus", @"images\5.jpg"));
+            Girland.Items.Add(new AutoList("Ford", "Infocus", @"images\6.jpg"));
+            Girland.Items.Add(new AutoList("Ford", "Onfocus", @"images\7.jpg"));
+            Girland.Items.Add(new AutoList("Ford", "Byfocus", @"images\8.jpg"));
+            Girland.Items.Add(new AutoList("Ford", "Forfocus", @"images\9.jpg"));
+            Girland.Items.Add(new AutoList("Ford", "Tofocus", @"images\10.jpg"));
 
             CreateTableView();
-            CreateBigIcons();
+            CreateBig();
+            CreateSmall();
+            CreateList();
         }
-        private void CreateBigIcons()
+
+        private void CreateTableView()
+        {
+            
+            GridViewColumn col1 = new GridViewColumn();
+            GridViewColumnHeader col1H = new GridViewColumnHeader();
+            col1H.Content = "Brand";
+            col1.Header = col1H;
+            col1.DisplayMemberBinding = new Binding("Brand");
+
+            GridViewColumn col2 = new GridViewColumn();
+            GridViewColumnHeader col2H = new GridViewColumnHeader();
+            col2H.Content = "Model";
+            col2.Header = col2H;
+            col2.DisplayMemberBinding = new Binding("Model");
+
+            GridViewColumn col3 = new GridViewColumn();
+            col3.Header = "Photo";
+
+            DataTemplate DT_Cell = new DataTemplate();
+            FrameworkElementFactory ImageF = new FrameworkElementFactory(typeof(Image));
+            ImageF.SetValue(Image.SourceProperty, new Binding("Photo"));
+            ImageF.SetValue(Image.WidthProperty, Width = 60);
+            DT_Cell.VisualTree = ImageF; 
+            col3.CellTemplate = DT_Cell;
+
+            GV.Columns.Add(col1);
+            GV.Columns.Add(col2);
+            GV.Columns.Add(col3);
+
+            Girland.View = GV;
+            IPT_Tabel = new ItemsPanelTemplate();
+            FrameworkElementFactory WPF_Table = new FrameworkElementFactory(typeof(StackPanel));
+            WPF_Table.SetValue(WrapPanel.OrientationProperty, Orientation.Vertical);
+            IPT_Tabel.VisualTree = WPF_Table;
+
+        }
+
+        private void CreateBig()
         {
             FrameworkElementFactory StackPanelF_Big = new FrameworkElementFactory(typeof(StackPanel));
             StackPanelF_Big.SetValue(StackPanel.BackgroundProperty, Background = new SolidColorBrush(Colors.Beige));
 
             FrameworkElementFactory ImageFB = new FrameworkElementFactory(typeof(Image));
-            ImageFB.SetValue(Image.SourceProperty, new Binding("Image"));
+            ImageFB.SetValue(Image.SourceProperty, new Binding("Photo"));
             ImageFB.SetValue(Image.WidthProperty, Width = 200);
             StackPanelF_Big.AppendChild(ImageFB);
 
             FrameworkElementFactory LableF = new FrameworkElementFactory(typeof(Label));
-            LableF.SetValue(Label.ContentProperty, new Binding("Name"));
-            LableF.SetValue(Label.WidthProperty, Width = 50);
+            LableF.SetValue(Label.ContentProperty, new Binding("Brand"));
+            LableF.SetValue(Label.WidthProperty, Width = 80);
             StackPanelF_Big.AppendChild(LableF);
 
             FrameworkElementFactory LableC = new FrameworkElementFactory(typeof(Label));
-            LableC.SetValue(Label.ContentProperty, new Binding("MadeBy"));
-            LableC.SetValue(Label.WidthProperty, Width = 50);
+            LableC.SetValue(Label.ContentProperty, new Binding("Model"));
+            LableC.SetValue(Label.WidthProperty, Width = 80);
             StackPanelF_Big.AppendChild(LableC);
 
-            large = new DataTemplate();
-            large.VisualTree = StackPanelF_Big;
-            largeIcons = new ItemsPanelTemplate();
+            DT_Big = new DataTemplate();
+
+            DT_Big.VisualTree = StackPanelF_Big;
+
+            IPT_Big = new ItemsPanelTemplate();
 
             FrameworkElementFactory WPF_Big = new FrameworkElementFactory(typeof(WrapPanel));
             WPF_Big.SetValue(WrapPanel.OrientationProperty, Orientation.Horizontal);
 
             Binding B_W = new Binding("ActualWidth");
-            B_W.Source = this.productsListBox;
+            B_W.Source = this.Girland;
             WPF_Big.SetValue(WrapPanel.WidthProperty, B_W);
 
             Binding B_H = new Binding("ActualHeight");
-            B_H.Source = this.productsListBox;
+            B_H.Source = this.Girland;
             WPF_Big.SetValue(WrapPanel.HeightProperty, B_H);
 
-            largeIcons.VisualTree = WPF_Big;
-        }
-        private void CreateTableView()
-        {
-            GridViewColumn gridViewColumn1 = new GridViewColumn();
-            GridViewColumnHeader gridViewColumnHeader1 = new GridViewColumnHeader();
-            gridViewColumnHeader1.Content = "Name";
-            gridViewColumn1.Header = gridViewColumnHeader1;
-            gridViewColumn1.DisplayMemberBinding = new Binding("Name");
-
-            GridViewColumn gridViewColumn2 = new GridViewColumn();
-            GridViewColumnHeader gridViewColumnHeader2 = new GridViewColumnHeader();
-            gridViewColumnHeader2.Content = "Made in/by";
-            gridViewColumn2.Header = gridViewColumnHeader2;
-            gridViewColumn2.DisplayMemberBinding = new Binding("MadeBy");
-
-            GridViewColumn gridViewColumn3 = new GridViewColumn();
-            GridViewColumnHeader gridViewColumnHeader3 = new GridViewColumnHeader();
-            gridViewColumnHeader3.Content = "Price";
-            gridViewColumn3.Header = gridViewColumnHeader3;
-            gridViewColumn3.DisplayMemberBinding = new Binding("Price");
-
-            GridViewColumn gridViewColumn4 = new GridViewColumn();
-            gridViewColumn4.Header = "Photo";
-
-            DataTemplate dataTemplateCell = new DataTemplate();
-            FrameworkElementFactory frameworkElementFactory =
-                new FrameworkElementFactory(typeof(Image));
-            frameworkElementFactory.SetValue(Image.SourceProperty, new Binding("Image"));
-            frameworkElementFactory.SetValue(Image.WidthProperty, Width = 60);
-            dataTemplateCell.VisualTree = frameworkElementFactory;
-            gridViewColumn4.CellTemplate = dataTemplateCell;
-
-            gridView.Columns.Add(gridViewColumn1);
-            gridView.Columns.Add(gridViewColumn2);
-            gridView.Columns.Add(gridViewColumn3);
-            gridView.Columns.Add(gridViewColumn4);
-
-            productsListBox.View = gridView;
-            table = new ItemsPanelTemplate();
-            FrameworkElementFactory WPFTable = new FrameworkElementFactory(typeof(StackPanel));
-            WPFTable.SetValue(WrapPanel.OrientationProperty, Orientation.Vertical);
-            table.VisualTree = WPFTable;
+            IPT_Big.VisualTree = WPF_Big;
         }
 
-        private void productsListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private void CreateSmall()
         {
-            if (productsListBox == null) return;
-            switch((sender as ComboBox).SelectedIndex)
+            FrameworkElementFactory StackPanelF_Small = new FrameworkElementFactory(typeof(StackPanel));
+            StackPanelF_Small.SetValue(StackPanel.BackgroundProperty, Background = new SolidColorBrush(Colors.Beige));
+            
+            FrameworkElementFactory ImageFS = new FrameworkElementFactory(typeof(Image));
+            ImageFS.SetValue(Image.SourceProperty, new Binding("Photo"));
+            ImageFS.SetValue(Image.WidthProperty, Width = 20);
+            StackPanelF_Small.AppendChild(ImageFS);
+
+            FrameworkElementFactory LableF = new FrameworkElementFactory(typeof(Label));
+            LableF.SetValue(Label.ContentProperty, new Binding("Brand"));
+            LableF.SetValue(Label.WidthProperty, Width = 80);
+            StackPanelF_Small.AppendChild(LableF);
+
+            FrameworkElementFactory LableC = new FrameworkElementFactory(typeof(Label));
+            LableC.SetValue(Label.ContentProperty, new Binding("Model"));
+            LableC.SetValue(Label.WidthProperty, Width = 80);
+            StackPanelF_Small.AppendChild(LableC);
+
+            DT_Small = new DataTemplate();
+
+            DT_Small.VisualTree = StackPanelF_Small;
+
+            IPT_Small = new ItemsPanelTemplate();
+
+            FrameworkElementFactory WPF_Small = new FrameworkElementFactory(typeof(WrapPanel));
+            WPF_Small.SetValue(WrapPanel.OrientationProperty, Orientation.Horizontal);
+
+            Binding S_W = new Binding("ActualWidth");
+            S_W.Source = this.Girland;
+            WPF_Small.SetValue(WrapPanel.WidthProperty, S_W);
+
+            Binding S_H = new Binding("ActualHeight");
+            S_H.Source = this.Girland;
+            WPF_Small.SetValue(WrapPanel.HeightProperty, S_H);
+
+            IPT_Small.VisualTree = WPF_Small;
+        }
+
+        public void CreateList()
+        {
+            FrameworkElementFactory StackPanelF_List = new FrameworkElementFactory(typeof(StackPanel));
+                       
+            FrameworkElementFactory LableC = new FrameworkElementFactory(typeof(Label));
+            LableC.SetValue(Label.ContentProperty, new Binding("Model"));
+            StackPanelF_List.AppendChild(LableC);
+
+            DT_List = new DataTemplate();
+
+            DT_List.VisualTree = StackPanelF_List;
+
+            IPT_List = new ItemsPanelTemplate();
+
+            FrameworkElementFactory WPF_List = new FrameworkElementFactory(typeof(StackPanel));
+           
+            Binding S_H = new Binding("ActualHeight");
+            S_H.Source = this.Girland;
+            WPF_List.SetValue(WrapPanel.HeightProperty, S_H);
+
+            IPT_List.VisualTree = WPF_List;
+
+        }
+
+        private void ViewType_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (Girland == null) return;
+            switch (((ComboBox)sender).SelectedIndex)
             {
                 case 0:
-                    productsListBox.ItemsPanel = table;
-                    productsListBox.View = gridView;
+                    Girland.ItemsPanel = IPT_Tabel;
+                    Girland.View = GV;
                     break;
+
                 case 1:
-                    productsListBox.ItemTemplate = large;
-                    productsListBox.ItemsPanel = largeIcons;
-                    productsListBox.View = gridView;
+                    Girland.ItemTemplate = DT_Big;
+                    Girland.ItemsPanel = IPT_Big;
+                    Girland.View = null;
                     break;
+                
+                case 2:
+                    Girland.ItemTemplate = DT_Small;
+                    Girland.ItemsPanel = IPT_Small;
+                    Girland.View = null;
+                    break;
+
+                case 3:
+                    Girland.ItemTemplate = DT_List;
+                    Girland.ItemsPanel = IPT_List;
+                    Girland.View = null;
+                    break;
+
                 default:
                     break;
+
             }
         }
+
     }
 }
